@@ -7,7 +7,7 @@ const io = require('socket.io')(server);
 // Waiting queue for users
 let waitingQueue = [];
 // Active rooms
-let rooms = {};
+let rooms = {};   
 // Track user socket IDs to handle reconnections properly
 let userSocketMap = {};
 // Track users that have connected before (to prevent rejoining)
@@ -59,6 +59,7 @@ io.on('connection', (socket) => {
   console.log(`[${getTimestamp()}] CONNECT: Socket ${socket.id} connected.`);
 
   socket.on('join_queue', (data) => {
+    console.log(`Join_Queue : ${data.userId}`);
     const userId = data.userId;
 
     // Check if this user has connected before, and reject if so
